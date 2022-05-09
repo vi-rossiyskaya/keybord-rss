@@ -1,0 +1,12 @@
+.btn {
+    min-width: 65px;
+    min-height: 62px;
+    background-color: bisque;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 1091px;
+}
