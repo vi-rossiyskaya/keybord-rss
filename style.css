@@ -5,8 +5,25 @@
 }
 
 .container {
+    margin: 100px auto;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     width: 1091px;
+}
+
+.btn[data-code='Tab'] {
+    min-width: 100px;
+}
+.btn[data-code='Backspace'] {
+    min-width: 100px;
+}
+.btn[data-code='Space'] {
+    min-width: 360px;
+}
+.btn[data-code='CapsLock'], .btn[data-code='Enter'] {
+    min-width: 119px;
+}
+.btn[data-code='ShiftLeft'],  .btn[data-code='ShiftRight']{
+    min-width: 155px;
 }

@@ -2,10 +2,10 @@ const body = document.querySelector('body');
 const main = document.createElement('main');
 const container = document.createElement('div');
 
-let ru = [
+let en = [
     {
-        "key": "§",
-        "code": "Backquote"
+        "key": "`",
+        "code": "IntlBackslash"
     },
     {
         "key": "1",
@@ -112,8 +112,8 @@ let ru = [
         "code": "BracketRight"
     },
     {
-        "key": "Enter",
-        "code": "Enter"
+        "key": "\\",
+        "code": "Backslash"
     },
     {
         "key": "CapsLock",
@@ -164,16 +164,12 @@ let ru = [
         "code": "Quote"
     },
     {
-        "key": "\\",
-        "code": "Backslash"
+        "key": "Enter",
+        "code": "Enter"
     },
     {
         "key": "Shift",
         "code": "ShiftLeft"
-    },
-    {
-        "key": "`",
-        "code": "IntlBackslash"
     },
     {
         "key": "z",
@@ -267,8 +263,9 @@ let ru = [
 
 for (let i = 0; i < 63; i++) {
     let btn = document.createElement('div');
-    btn.append(`${ru[i].key}`);
+    btn.append(`${en[i].key}`);
     btn.classList.add('btn')
+    btn.dataset.code = `${en[i].code}`;
     container.append(btn);
     // console.log(btn)
 }
@@ -285,7 +282,7 @@ document.onkeyup = function (event) {
 }
 
 
-console.log(ru)
+console.log(en)
 
 
 container.classList.add('container')
