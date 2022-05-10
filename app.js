@@ -250,6 +250,10 @@ let en = [
         "code": "ArrowLeft"
     },
     {
+        "key": "ArrowWrap",
+        "code": ""
+    },
+    {
         "key": "ArrowUp",
         "code": "ArrowUp"
     },
@@ -263,14 +267,16 @@ let en = [
     }
 ]
 
-for (let i = 0; i < 63; i++) {
+for (let i = 0; i < 65; i++) {
     let btn = document.createElement('div');
     btn.append(`${en[i].key}`);
     btn.classList.add('btn')
+    if (en[i].key.length > 2 ) {btn.classList.add('justify-left')}
     btn.dataset.code = `${en[i].code}`;
     btn.dataset.key = `${en[i].key}`;
     container.append(btn);
 }
+
 
 container.addEventListener('click', (e) => {
     pressBtn(e)
@@ -312,7 +318,7 @@ document.onkeyup = function (event) {
     }
 }
 
-message.append('MacOS keyboard. Switch language: cmd (ctrl) + C. Delete: cmd (ctrl) + backspase')
+message.append('MacOS keyboard. Switch language: cmd (ctrl) + space. Delete: fn + backspase')
 
 
 container.classList.add('container')
@@ -323,3 +329,28 @@ main.append(textarea)
 main.append(container);
 main.append(message);
 body.append(main);
+
+const cmd = document.querySelectorAll(`.btn[data-key='Meta']`);
+cmd.forEach(e => {e.innerHTML = 'Cmd'})
+
+const ctrl = document.querySelector(`.btn[data-key='Control']`);
+ctrl.innerHTML = 'Ctrl'
+const fn = document.querySelector(`.btn[data-key='Function']`);
+fn.innerHTML = 'Fn'
+const arrLeft = document.querySelector(`.btn[data-key='ArrowLeft']`);
+arrLeft.innerHTML = '&#9668;'
+const btnWrap = document.querySelector(`.btn[data-key='ArrowWrap']`);
+btnWrap.classList.add('btn')
+btnWrap.innerHTML = ""
+const arrUp = document.querySelector(`.btn[data-key='ArrowUp']`);
+console.log(btnWrap)
+
+arrUp.innerHTML = '&#9650;'
+console.log(arrUp)
+const arrDown = document.querySelector(`.btn[data-key='ArrowDown']`);
+arrDown.innerHTML = '&#9660;'
+btnWrap.append(arrUp)
+btnWrap.append(arrDown)
+console.log(btnWrap)
+const arrRight = document.querySelector(`.btn[data-key='ArrowRight']`);
+arrRight.innerHTML = '&#9658;'

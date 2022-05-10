@@ -1,22 +1,31 @@
 .btn {
     min-width: 65px;
-    min-height: 62px;
+    height: 62px;
     background-color: bisque;
     border-bottom: 3px sandybrown solid;
     border-radius: 5px;
     box-shadow: -2px 0px 20px 2px rgb(255, 255, 255) inset;
     display: flex;
-    align-items: flex-end;
+    padding: 7px;
+    justify-content: center;
+    align-items: center;
     font-size: 1.2rem;
     position: relative;
     box-sizing: border-box;
     transition: border-bottom 0.08s linear;
 }
 
+
+
 .btn.pressed {
-    border: 1px rgb(220, 141, 72) solid;
+    border: 0px rgb(220, 141, 72) solid;
     top: 3px;    
-    box-shadow: none;
+    background-color: rgb(255, 219, 173);
+}
+
+.message {
+    margin: 0 auto;
+    width: 1091px;
 }
 
 .textarea {
@@ -24,10 +33,13 @@
     margin: 100px auto 10px;
     padding: 10px;
     min-width: 1091px;
+    max-width: 1091px;
+    min-height: 62px;
     height: 200px;
     border:rgb(220, 141, 72) 1px solid;
     color: rgb(75, 3, 75);
     font-size: 1.5rem;
+    outline: rgb(220, 141, 72) 1px solid;
 }
 
 .container {
@@ -54,4 +66,14 @@
 }
 .btn[data-code='ShiftLeft'],  .btn[data-code='ShiftRight']{
     min-width: 155px;
+}
+
+.btn[data-key='ArrowUp'], .btn[data-key='ArrowDown'] {
+    height: 31px;
+}
+
+.btn[data-key='ArrowWrap'] {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
 }
