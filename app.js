@@ -1,6 +1,8 @@
 const body = document.querySelector('body');
 const main = document.createElement('main');
 const container = document.createElement('div');
+const message = document.createElement('div');
+const textarea = document.createElement('textarea');
 
 let en = [
     {
@@ -266,26 +268,58 @@ for (let i = 0; i < 63; i++) {
     btn.append(`${en[i].key}`);
     btn.classList.add('btn')
     btn.dataset.code = `${en[i].code}`;
+    btn.dataset.key = `${en[i].key}`;
     container.append(btn);
-    // console.log(btn)
 }
 
+container.addEventListener('click', (e) => {
+    pressBtn(e)
+})
 
+function pressBtn(e) {
+    if (e.target.classList.contains('btn')) {
+        e.target.classList.toggle('pressed')
+        const key = e.target.getAttribute('data-key');
+        if (key.length < 2) {
+            textarea.innerHTML += `${key}`
+        }
+        setTimeout(() => {
+            e.target.classList.toggle('pressed')
+        }, 700)
+    }
+}
 
+document.onkeydown = function (event) {
+    if (event.key.length < 2) {
+        textarea.innerHTML += `${event.key}`;
+        const keyBtn = document.querySelector(`.btn[data-key='${event.key}']`)
+        keyBtn.classList.add('pressed');
+    } else {
+        const keyBtn = document.querySelector(`.btn[data-code='${event.code}']`)
+        keyBtn.classList.add('pressed');
+        keyBtn.onkeyup = () => keyBtn.classList.remove('pressed')
+    }
+}
 
 document.onkeyup = function (event) {
-    let a = {}
-    a.key = event.key;
-    a.code = event.code;
-    console.log(a)
-
+    if (event.key.length < 2) {
+        textarea.innerHTML += `${event.key}`;
+        const keyBtn = document.querySelector(`.btn[data-key='${event.key}']`)
+        keyBtn.classList.remove('pressed')
+    } else {
+        const keyBtn = document.querySelector(`.btn[data-code='${event.code}']`)
+        keyBtn.classList.remove('pressed')
+    }
 }
 
-
-console.log(en)
+message.append('MacOS keyboard. Switch language: cmd (ctrl) + C. Delete: cmd (ctrl) + backspase')
 
 
 container.classList.add('container')
+message.classList.add('message')
+textarea.classList.add('textarea')
 
+main.append(textarea)
 main.append(container);
+main.append(message);
 body.append(main);

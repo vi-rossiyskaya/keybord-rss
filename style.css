@@ -2,15 +2,43 @@
     min-width: 65px;
     min-height: 62px;
     background-color: bisque;
+    border-bottom: 3px sandybrown solid;
+    border-radius: 5px;
+    box-shadow: -2px 0px 20px 2px rgb(255, 255, 255) inset;
+    display: flex;
+    align-items: flex-end;
+    font-size: 1.2rem;
+    position: relative;
+    box-sizing: border-box;
+    transition: border-bottom 0.08s linear;
+}
+
+.btn.pressed {
+    border: 1px rgb(220, 141, 72) solid;
+    top: 3px;    
+    box-shadow: none;
+}
+
+.textarea {
+    display: block;
+    margin: 100px auto 10px;
+    padding: 10px;
+    min-width: 1091px;
+    height: 200px;
+    border:rgb(220, 141, 72) 1px solid;
+    color: rgb(75, 3, 75);
+    font-size: 1.5rem;
 }
 
 .container {
-    margin: 100px auto;
+    margin: 10px auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    justify-content: space-around;
+    gap: 9px;
     width: 1091px;
 }
+
 
 .btn[data-code='Tab'] {
     min-width: 100px;
