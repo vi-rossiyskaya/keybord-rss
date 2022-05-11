@@ -278,9 +278,11 @@ for (let i = 0; i < 65; i++) {
 }
 
 
-container.addEventListener('click', (e) => {
+container.addEventListener('mousedown', (e) => {
     pressBtn(e)
 })
+
+
 
 function pressBtn(e) {
     if (e.target.classList.contains('btn')) {
@@ -289,14 +291,19 @@ function pressBtn(e) {
         if (key.length < 2) {
             textarea.innerHTML += `${key}`
         }
-        setTimeout(() => {
-            e.target.classList.toggle('pressed')
-        }, 700)
     }
 }
 
+container.addEventListener('mouseup', (e) => {
+    console.log(e)
+    if (e.target.classList.contains('btn')) {
+        e.target.classList.toggle('pressed')
+    }
+})
+
 document.onkeydown = function (event) {
-    if (event.key.length < 2) {
+    console.log(event)
+    if (event.key.length < 2 && event.key != '\\' && event.key != "'") {
         textarea.innerHTML += `${event.key}`;
         const keyBtn = document.querySelector(`.btn[data-key='${event.key}']`)
         keyBtn.classList.add('pressed');
@@ -307,8 +314,21 @@ document.onkeydown = function (event) {
     }
 }
 
+function keyup(event) {
+    document.onkeyup = function (event) {
+        if (event.key.length < 2 && event.key != '\\' && event.key != "'") {
+            textarea.innerHTML += `${event.key}`;
+            const keyBtn = document.querySelector(`.btn[data-key='${event.key}']`)
+            keyBtn.classList.remove('pressed')
+        } else {
+            const keyBtn = document.querySelector(`.btn[data-code='${event.code}']`)
+            keyBtn.classList.remove('pressed')
+        }
+    }
+}
+
 document.onkeyup = function (event) {
-    if (event.key.length < 2) {
+    if (event.key.length < 2 && event.key != '\\' && event.key != "'") {
         textarea.innerHTML += `${event.key}`;
         const keyBtn = document.querySelector(`.btn[data-key='${event.key}']`)
         keyBtn.classList.remove('pressed')
@@ -343,14 +363,11 @@ const btnWrap = document.querySelector(`.btn[data-key='ArrowWrap']`);
 btnWrap.classList.add('btn')
 btnWrap.innerHTML = ""
 const arrUp = document.querySelector(`.btn[data-key='ArrowUp']`);
-console.log(btnWrap)
 
 arrUp.innerHTML = '&#9650;'
-console.log(arrUp)
 const arrDown = document.querySelector(`.btn[data-key='ArrowDown']`);
 arrDown.innerHTML = '&#9660;'
 btnWrap.append(arrUp)
 btnWrap.append(arrDown)
-console.log(btnWrap)
 const arrRight = document.querySelector(`.btn[data-key='ArrowRight']`);
 arrRight.innerHTML = '&#9658;'
