@@ -287,7 +287,11 @@ container.addEventListener('mousedown', (e) => {
 
 
 function funcKeys(key) {
+    console.log('key', key)
+    console.log(textarea.value)
     if (key == 'Enter') {textarea.value += `\n`}
+    if (key == 'Tab') {textarea.value += `    `}
+    if (key == 'Backspace') {textarea.value = textarea.value.slice(0, -1)}
 }
 
 
@@ -333,7 +337,7 @@ document.onkeyup = function (event) {
     }
 }
 
-message.append('MacOS keyboard. Switch language: cmd (ctrl) + space. Delete: fn + backspase')
+message.append('MacOS keyboard. Switch language: not implemented.')
 
 
 container.classList.add('container')
