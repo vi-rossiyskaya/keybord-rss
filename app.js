@@ -264,10 +264,14 @@ let en = [
     {
         "key": "ArrowRight",
         "code": "ArrowRight"
+    },
+    {
+        "key": "Delete",
+        "code": "Delete"
     }
 ]
 
-for (let i = 0; i < 65; i++) {
+for (let i = 0; i < 66; i++) {
     let btn = document.createElement('div');
     btn.append(`${en[i].key}`);
     btn.classList.add('btn')
@@ -277,22 +281,28 @@ for (let i = 0; i < 65; i++) {
     container.append(btn);
 }
 
-
 container.addEventListener('mousedown', (e) => {
     pressBtn(e)
 })
 
+
+function funcKeys(key) {
+    if (key == 'Enter') {textarea.value += `\n`}
+}
 
 
 function pressBtn(e) {
     if (e.target.classList.contains('btn')) {
         e.target.classList.toggle('pressed')
         const key = e.target.getAttribute('data-key');
+        
+        funcKeys(key);
         if (key.length < 2) {
-            textarea.innerHTML += `${key}`
+            textarea.value += `${key}`
         }
     }
 }
+
 
 container.addEventListener('mouseup', (e) => {
     if (e.target.classList.contains('btn')) {
@@ -300,14 +310,11 @@ container.addEventListener('mouseup', (e) => {
     }
 })
 
+
 document.onkeydown = function (event) {
-    console.log(event)
+    funcKeys(event.key)
     if (event.key.length < 2 && event.key != '\\' && event.key != "'") {
-        textarea.innerHTML += `${event.key}`;
-        const keyBtn = document.querySelector(`.btn[data-key='${event.key}']`)
-        keyBtn.classList.add('pressed');
-    } else if (event.key == '\\' || event.key == "'") {
-        textarea.innerHTML += `${event.key}`;
+        textarea.value += `${event.key}`
         const codeBtn = document.querySelector(`.btn[data-code='${event.code}']`)
         codeBtn.classList.add('pressed');
     } else {
@@ -317,13 +324,9 @@ document.onkeydown = function (event) {
 }
 
 document.onkeyup = function (event) {
-    if (event.key.length < 2 && event.key != '\\' && event.key != "'") {
-        textarea.innerHTML += `${event.key}`;
-        const keyBtn = document.querySelector(`.btn[data-key='${event.key}']`)
-        keyBtn.classList.remove('pressed')
-    } else if ( event.key != '\\' || event.key != "'") {
+    if (event.key.length < 2) {
         const codeBtn = document.querySelector(`.btn[data-code='${event.code}']`)
-        codeBtn.classList.remove('pressed');
+        codeBtn.classList.remove('pressed')
     } else {
         const keyBtn = document.querySelector(`.btn[data-code='${event.code}']`)
         keyBtn.classList.remove('pressed')
@@ -344,7 +347,6 @@ body.append(main);
 
 const cmd = document.querySelectorAll(`.btn[data-key='Meta']`);
 cmd.forEach(e => {e.innerHTML = 'Cmd'})
-
 const ctrl = document.querySelector(`.btn[data-key='Control']`);
 ctrl.innerHTML = 'Ctrl'
 const fn = document.querySelector(`.btn[data-key='Function']`);
@@ -363,3 +365,4 @@ btnWrap.append(arrUp)
 btnWrap.append(arrDown)
 const arrRight = document.querySelector(`.btn[data-key='ArrowRight']`);
 arrRight.innerHTML = '&#9658;'
+
