@@ -16,7 +16,7 @@
     "url": "https://github.com/vi-rossiyskaya/keybord-rss/issues"
   },
   "homepage": "https://github.com/vi-rossiyskaya/keybord-rss#readme",
-  "dependencies": {
+  "devDependencies": {
     "eslint": "^8.15.0"
   }
 }
