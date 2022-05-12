@@ -295,7 +295,6 @@ function pressBtn(e) {
 }
 
 container.addEventListener('mouseup', (e) => {
-    console.log(e)
     if (e.target.classList.contains('btn')) {
         e.target.classList.toggle('pressed')
     }
@@ -307,23 +306,13 @@ document.onkeydown = function (event) {
         textarea.innerHTML += `${event.key}`;
         const keyBtn = document.querySelector(`.btn[data-key='${event.key}']`)
         keyBtn.classList.add('pressed');
+    } else if (event.key == '\\' || event.key == "'") {
+        textarea.innerHTML += `${event.key}`;
+        const codeBtn = document.querySelector(`.btn[data-code='${event.code}']`)
+        codeBtn.classList.add('pressed');
     } else {
         const keyBtn = document.querySelector(`.btn[data-code='${event.code}']`)
         keyBtn.classList.add('pressed');
-        keyBtn.onkeyup = () => keyBtn.classList.remove('pressed')
-    }
-}
-
-function keyup(event) {
-    document.onkeyup = function (event) {
-        if (event.key.length < 2 && event.key != '\\' && event.key != "'") {
-            textarea.innerHTML += `${event.key}`;
-            const keyBtn = document.querySelector(`.btn[data-key='${event.key}']`)
-            keyBtn.classList.remove('pressed')
-        } else {
-            const keyBtn = document.querySelector(`.btn[data-code='${event.code}']`)
-            keyBtn.classList.remove('pressed')
-        }
     }
 }
 
@@ -332,6 +321,9 @@ document.onkeyup = function (event) {
         textarea.innerHTML += `${event.key}`;
         const keyBtn = document.querySelector(`.btn[data-key='${event.key}']`)
         keyBtn.classList.remove('pressed')
+    } else if ( event.key != '\\' || event.key != "'") {
+        const codeBtn = document.querySelector(`.btn[data-code='${event.code}']`)
+        codeBtn.classList.remove('pressed');
     } else {
         const keyBtn = document.querySelector(`.btn[data-code='${event.code}']`)
         keyBtn.classList.remove('pressed')
